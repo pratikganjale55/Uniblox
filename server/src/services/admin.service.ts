@@ -24,7 +24,7 @@ export const generateCoupon = () => {
 
         return coupon;
     }
-
+    console.log("coupons, orders data", coupons, orders )
     return null;
 };
 
@@ -51,6 +51,7 @@ export const getStats = () => {
         totalOrders: orders.length,
         revenue,
         totalDiscount,
+        discountCodes: coupons,
         totalCoupons: coupons.length,
         itemCount
     };

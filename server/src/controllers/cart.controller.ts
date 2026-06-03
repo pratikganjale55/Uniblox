@@ -9,9 +9,20 @@ export const addItem = (req: Request, res: Response) => {
     if (!userId || !item) {
         return res.status(400).json({ message: "userId or item is missing" });
     }
+    if (!item.productId || !item.name || item.price == null || item.quantity == null) {
+
+        return res.status(400).json({ message: "item must have productId, name, price, quantity" });
+
+    }
+
+    if (item.price < 0 || item.quantity <= 0) {
+
+        return res.status(400).json({ message: "price must be >= 0 and quantity must be > 0" });
+
+    }
 
     const cart = addToCart(userId, item);
-
+    console.log("Cart data:", cart);
     res.json({
         success: true,
         cart

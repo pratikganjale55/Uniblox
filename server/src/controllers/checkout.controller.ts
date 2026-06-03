@@ -9,6 +9,9 @@ export const placeOrder = (
   try {
     const { userId, couponCode } = req.body;
 
+    if (!userId) {
+      return res.status(400).json({ success: false, message: "userId is required" });
+    }
     const order = checkout(
       userId,
       couponCode

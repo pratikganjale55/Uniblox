@@ -11,7 +11,9 @@ export const checkout = (
     userId: string,
     couponCode?: string
 ) => {
-    const cart = carts.find(c => c.userId === userId);
+    const cart = [...carts]
+        .reverse()
+        .find(c => c.userId === userId);
 
     if (!cart) {
         throw new Error("Cart not found");
@@ -56,6 +58,7 @@ export const checkout = (
     };
 
     orders.push(order);
+    console.log("Order placed:", order);
     generateCoupon();
     cart.items = [];
 
